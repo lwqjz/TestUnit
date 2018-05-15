@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.hnust.dao.IStudentDao">
+	<resultMap id="BaseResultMap" type="com.cn.hnust.pojo.Student">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="STU_NAME" property="stu_name" jdbcType="VARCHAR" />
+		<result column="AGE" property="age" jdbcType="INTEGER" />
+		<result column="GENDER" property="gender" jdbcType="VARCHAR" />
+		<result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<parameterMap id="Student" type="com.cn.hnust.pojo.Student" />
+
+	<sql id="Base_Column_List">
+		id,STU_NAME,AGE,GENDER,ADDRESS
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		from student
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.cn.hnust.pojo.Student">
+	  insert into student(id,STU_NAME,AGE,GENDER,ADDRESS) 
+	  values(#{id,jdbcType=NUMERIC}, #{stu_name,jdbcType=VARCHAR}, #{age,jdbcType=NUMERIC}, #{gender,jdbcType=NUMERIC}, #{address,jdbcType=VARCHAR})
+	</insert>
+</mapper>
